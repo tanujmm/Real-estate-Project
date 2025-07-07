@@ -12,9 +12,10 @@ const Header = () => {
     e.preventDefault();
     if (searchTerm.trim()) {
       navigate(
-        `${
-          import.meta.env.VITE_BACKEND_URL
-        }/search?searchTerm=${searchTerm.trim()}`
+        // `${
+        //   import.meta.env.VITE_BACKEND_URL
+        // }/search?searchTerm=${searchTerm.trim()}`
+        `/search?searchTerm=${searchTerm.trim()}`
       );
     }
   };

@@ -17,7 +17,8 @@ const Oauth = () => {
       console.log(result);
       // const res = await fetch("/api/auth/google", {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/auth/google`,
+        // `${import.meta.env.VITE_BACKEND_URL}/api/auth/google`,
+        `/api/auth/google`,
         {
           method: "POST",
           headers: {

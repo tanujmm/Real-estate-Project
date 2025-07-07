@@ -80,9 +80,8 @@ const Profile = () => {
     try {
       dispatch(updateUserStart());
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/update/${
-          currentUser._id
-        }`,
+        // `${import.meta.env.VITE_BACKEND_URL}/api/user/update/${
+        `/api/user/update/${currentUser._id}`,
         {
           method: "POST",
           headers: {
@@ -110,9 +109,8 @@ const Profile = () => {
     try {
       dispatch(deleteUserStart());
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/delete/${
-          currentUser._id
-        }`,
+        // `${import.meta.env.VITE_BACKEND_URL}/api/user/delete/${
+        `/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
         }
@@ -133,7 +131,8 @@ const Profile = () => {
     try {
       dispatch(signOutUserStart());
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/auth/signout`
+        // `${import.meta.env.VITE_BACKEND_URL}/api/auth/signout`
+        `/api/auth/signout`
       );
       const data = await res.json();
       if (data.success === false) {
@@ -150,9 +149,8 @@ const Profile = () => {
     try {
       setShowListingsError(false);
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/user/listings/${
-          currentUser._id
-        }`
+        // `${import.meta.env.VITE_BACKEND_URL}/api/user/listings/${
+        `/api/user/listings/${currentUser._id}`
       );
       const data = await res.json();
 
@@ -170,7 +168,8 @@ const Profile = () => {
   const handleListingDelete = async (listingId) => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/listing/delete/${listingId}`,
+        // `${import.meta.env.VITE_BACKEND_URL}/api/listing/delete/${listingId}`,
+        `/api/listing/delete/${listingId}`,
         {
           method: "DELETE",
         }

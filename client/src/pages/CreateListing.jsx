@@ -136,7 +136,8 @@ const CreateListing = () => {
 
       // const res = await fetch("/api/listing/create", {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/listing/create`,
+        // `${import.meta.env.VITE_BACKEND_URL}/api/listing/create`,
+        `/api/listing/create`,
         {
           method: "POST",
           headers: {

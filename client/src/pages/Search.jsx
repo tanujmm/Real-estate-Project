@@ -511,7 +511,8 @@ const SearchPage = () => {
       const searchQuery = urlParams.toString();
       const res = await fetch(
         // `http://localhost:8007/api/listing/get?${searchQuery}`
-        `${import.meta.env.VITE_BACKEND_URL}/api/listing/get?${searchQuery}`
+        // `${import.meta.env.VITE_BACKEND_URL}/api/listing/get?${searchQuery}`
+        `/api/listing/get?${searchQuery}`
       );
       const data = await res.json();
       setListings(data);
@@ -567,9 +568,10 @@ const SearchPage = () => {
     urlParams.set("limit", 10);
     const res = await fetch(
       // `http://localhost:8007/api/listing/get?${urlParams.toString()}`
-      `${
-        import.meta.env.VITE_BACKEND_URL
-      }/api/listing/get?${urlParams.toString()}`
+      // `${
+      //   import.meta.env.VITE_BACKEND_URL
+      // }/api/listing/get?${urlParams.toString()}`
+      `/api/listing/get?${urlParams.toString()}`
     );
     const data = await res.json();
     if (data.length < 10) setShowMore(false);
