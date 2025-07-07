@@ -346,8 +346,8 @@ const Listing = () => {
             <h1 className="text-4xl font-bold text-gray-800">
               {listing.name} - $
               {listing.offer
-                ? listing.discountPrice.toLocaleString("en-INR")
-                : listing.regularPrice.toLocaleString("en-INR")}
+                ? listing.discountPrice.toLocaleString("en-IN")
+                : listing.regularPrice.toLocaleString("en-IN")}
               {listing.type === "rent" && "/month"}
             </h1>
 
