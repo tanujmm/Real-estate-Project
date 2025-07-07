@@ -17,9 +17,12 @@ const Home = () => {
     const fetchListings = async () => {
       try {
         const [offersRes, rentRes, saleRes] = await Promise.all([
-          fetch("http://localhost:8007/api/listing/get?offer=true&limit=4"),
-          fetch("http://localhost:8007/api/listing/get?type=rent&limit=4"),
-          fetch("http://localhost:8007/api/listing/get?type=sale&limit=4"),
+          // fetch("http://localhost:8007/api/listing/get?offer=true&limit=4"),
+          // fetch("http://localhost:8007/api/listing/get?type=rent&limit=4"),
+          // fetch("http://localhost:8007/api/listing/get?type=sale&limit=4"),
+          fetch("/api/listing/get?offer=true&limit=4"),
+          fetch("/api/listing/get?type=rent&limit=4"),
+          fetch("/api/listing/get?type=sale&limit=4"),
         ]);
 
         const [offers, rents, sales] = await Promise.all([

@@ -43,7 +43,8 @@ const Listing = () => {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://localhost:8007/api/listing/get/${params.listingId}`
+          // `http://localhost:8007/api/listing/get/${params.listingId}`
+          `/api/listing/get/${params.listingId}`
         );
         const data = await res.json();
 

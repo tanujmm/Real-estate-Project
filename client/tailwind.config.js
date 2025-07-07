@@ -1,5 +1,5 @@
 /**@type {import('tailwindcss').Config}*/
-const { extend } = require("leaflet");
+// const { extend } = require("leaflet");
 
 // tailwind.config.js
 export default {

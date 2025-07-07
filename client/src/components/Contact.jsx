@@ -10,6 +10,7 @@ const Contact = ({ listing }) => {
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
+        // const res = await fetch(`/api/user/${listing?.userRef}`, {
         const res = await fetch(`/api/user/${listing?.userRef}`, {
           headers: {
             Authorization: `Bearer ${currentUser?.token}`,

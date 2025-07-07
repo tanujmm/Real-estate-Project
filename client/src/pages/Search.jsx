@@ -510,7 +510,8 @@ const SearchPage = () => {
       setLoading(true);
       const searchQuery = urlParams.toString();
       const res = await fetch(
-        `http://localhost:8007/api/listing/get?${searchQuery}`
+        // `http://localhost:8007/api/listing/get?${searchQuery}`
+        `/api/listing/get?${searchQuery}`
       );
       const data = await res.json();
       setListings(data);
@@ -565,7 +566,8 @@ const SearchPage = () => {
     urlParams.set("startIndex", numberShown);
     urlParams.set("limit", 10);
     const res = await fetch(
-      `http://localhost:8007/api/listing/get?${urlParams.toString()}`
+      // `http://localhost:8007/api/listing/get?${urlParams.toString()}`
+      `/api/listing/get?${urlParams.toString()}`
     );
     const data = await res.json();
     if (data.length < 10) setShowMore(false);
