@@ -11,7 +11,11 @@ const Header = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      navigate(`/search?searchTerm=${searchTerm.trim()}`);
+      navigate(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/search?searchTerm=${searchTerm.trim()}`
+      );
     }
   };
 

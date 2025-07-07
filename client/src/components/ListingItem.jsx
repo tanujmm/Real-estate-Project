@@ -5,7 +5,7 @@ export default function ListingItem({ listing }) {
   if (!listing || !listing._id) return null;
   return (
     <div className="bg-white shadow-md hover:shadow-2xl transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px]">
-      <Link to={`/listing/${listing._id}`}>
+      <Link to={`${import.meta.env.VITE_BACKEND_URL}/listing/${listing._id}`}>
         <img
           src={
             listing.imageUrls[0] ||

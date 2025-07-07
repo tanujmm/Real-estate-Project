@@ -15,17 +15,21 @@ const Oauth = () => {
 
       const result = await signInWithPopup(auth, provider);
       console.log(result);
-      const res = await fetch("/api/auth/google", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          name: result.user.displayName,
-          email: result.user.email,
-          photo: result.user.photoURL,
-        }),
-      });
+      // const res = await fetch("/api/auth/google", {
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/google`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name: result.user.displayName,
+            email: result.user.email,
+            photo: result.user.photoURL,
+          }),
+        }
+      );
       const data = await res.json();
       dispatch(signinSuccess(data));
       navigate("/");

@@ -11,11 +11,14 @@ const Contact = ({ listing }) => {
     const fetchLandlord = async () => {
       try {
         // const res = await fetch(`/api/user/${listing?.userRef}`, {
-        const res = await fetch(`/api/user/${listing?.userRef}`, {
-          headers: {
-            Authorization: `Bearer ${currentUser?.token}`,
-          },
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/api/user/${listing?.userRef}`,
+          {
+            headers: {
+              Authorization: `Bearer ${currentUser?.token}`,
+            },
+          }
+        );
         const data = await res.json();
         if (data.success === false) {
           return;

@@ -44,7 +44,9 @@ const Listing = () => {
         setLoading(true);
         const res = await fetch(
           // `http://localhost:8007/api/listing/get/${params.listingId}`
-          `/api/listing/get/${params.listingId}`
+          `${import.meta.env.VITE_BACKEND_URL}}/api/listing/get/${
+            params.listingId
+          }`
         );
         const data = await res.json();
 
