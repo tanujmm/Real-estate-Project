@@ -42,13 +42,7 @@
 //     const fetchListing = async () => {
 //       try {
 //         setLoading(true);
-//         const res = await fetch(
-//           // `http://localhost:8007/api/listing/get/${params.listingId}`
-//           // `${import.meta.env.VITE_BACKEND_URL}}/api/listing/get/${
-//           //   params.listingId
-//           // }`
-//           `/api/listing/get/${params.listingId}`
-//         );
+//         const res = await fetch(`/api/listing/get/${params.listingId}`);
 //         const data = await res.json();
 
 //         if (data.success === false) {
@@ -57,6 +51,7 @@
 //           return;
 //         }
 
+//         // Try to populate missing coordinates on backend side (better solution)
 //         if (!data.latitude || !data.longitude) {
 //           const geoRes = await fetch(
 //             `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
@@ -98,10 +93,11 @@
 //           <Swiper navigation className="h-[500px]">
 //             {listing.imageUrls.map((url) => (
 //               <SwiperSlide key={url}>
-//                 <div
-//                   className="h-full w-full bg-cover bg-center"
-//                   style={{ backgroundImage: `url(${url})` }}
-//                 ></div>
+//                 <img
+//                   src={url}
+//                   alt="listing"
+//                   className="w-full h-full object-cover"
+//                 />
 //               </SwiperSlide>
 //             ))}
 //           </Swiper>
@@ -125,10 +121,16 @@
 
 //           <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
 //             <h1 className="text-4xl font-bold text-gray-800">
-//               {listing.name} - $
+//               {listing.name} - Rs.
 //               {listing.offer
-//                 ? listing.discountPrice.toLocaleString("en-US")
-//                 : listing.regularPrice.toLocaleString("en-US")}
+//                 ? listing.discountPrice.toLocaleString("en-IN", {
+//                     style: "currency",
+//                     currency: "INR",
+//                   })
+//                 : listing.regularPrice.toLocaleString("en-IN", {
+//                     style: "currency",
+//                     currency: "INR",
+//                   })}
 //               {listing.type === "rent" && "/month"}
 //             </h1>
 
@@ -189,7 +191,7 @@
 
 //             {contact && <Contact listing={listing} />}
 
-//             {listing.latitude && listing.longitude && (
+//             {listing.latitude && listing.longitude ? (
 //               <div className="mt-10">
 //                 <h2 className="text-xl font-bold mb-3 text-slate-800">
 //                   Property Location
@@ -211,6 +213,10 @@
 //                   </MapContainer>
 //                 </div>
 //               </div>
+//             ) : (
+//               <p className="text-red-500">
+//                 Location not available for this listing.
+//               </p>
 //             )}
 //           </div>
 //         </div>
@@ -274,7 +280,6 @@ const Listing = () => {
           return;
         }
 
-        // Try to populate missing coordinates on backend side (better solution)
         if (!data.latitude || !data.longitude) {
           const geoRes = await fetch(
             `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
@@ -313,13 +318,18 @@ const Listing = () => {
 
       {listing && !loading && !error && (
         <div>
-          <Swiper navigation className="h-[500px]">
+          <Swiper
+            navigation
+            className="h-[500px]"
+            style={{ maxHeight: "500px" }}
+          >
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
                 <img
                   src={url}
                   alt="listing"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
                 />
               </SwiperSlide>
             ))}
@@ -344,7 +354,7 @@ const Listing = () => {
 
           <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
             <h1 className="text-4xl font-bold text-gray-800">
-              {listing.name} - $
+              {listing.name} - ₹
               {listing.offer
                 ? listing.discountPrice.toLocaleString("en-IN")
                 : listing.regularPrice.toLocaleString("en-IN")}
@@ -362,7 +372,7 @@ const Listing = () => {
               </span>
               {listing.offer && (
                 <span className="bg-green-600 text-white px-4 py-1 rounded-full text-sm shadow">
-                  ${+listing.regularPrice - +listing.discountPrice} OFF
+                  ₹{+listing.regularPrice - +listing.discountPrice} OFF
                 </span>
               )}
             </div>
